@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Mason McKeen.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -79,8 +79,34 @@ def draw_L(window, circle, r, c):
       :type c: int
     and m and n are small, positive integers.
     """
+    xori = circle.center.x
+    yori = circle.center.y
+    radius = circle.radius
+    x = xori
+    y = yori
+    for k in range(r + 3):
+        for j in range(3):
+            newcircle = rg.Circle(rg.Point(x, y), radius)
+            newcircle.fill_color = circle.fill_color
+            newcircle.attach_to(window)
+            window.render()
+            x = x + 2 * radius
+        y = y + 2 * radius
+        x = xori
+    y = y - (3 * 2 * radius)
+    x = x + (3 * 2 * radius)
+    xori = x
+    for k in range(3):
+        for j in range(c):
+            newcircle = rg.Circle(rg.Point(x, y), radius)
+            newcircle.fill_color = circle.fill_color
+            newcircle.attach_to(window)
+            window.render()
+            x = x + 2 * radius
+        y = y + 2 * radius
+        x = xori
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -120,8 +146,29 @@ def draw_wall_on_right(rectangle, n, window):
       :type window: rg.RoseWindow
     and n is a small, positive integer.
     """
+    xori = rectangle.corner_1.x
+    yori = rectangle.corner_1.y
+    xori2 = rectangle.corner_2.x
+    yori2 = rectangle.corner_2.y
+    x = xori
+    y = yori
+    x2 = xori2
+    y2 = yori2
+    width = xori2 - xori
+    height = yori2 - yori
+    for k in range(n):
+        for j in range(k + 1):
+            newrect = rg.Rectangle(rg.Point(x,y), rg.Point(x2, y2))
+            newrect.attach_to(window)
+            window.render()
+            x = x - width
+            x2 = x2 - height
+        y = y + height
+        y2 =y2 + height
+        x = xori
+        x2 = xori2
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
